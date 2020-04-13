@@ -1,3 +1,4 @@
 {
-    "mongoURI": "mongodb+srv://obaid_k2:obaid123@devcluster-wqgqm.mongodb.net/test?retryWrites=true&w=majority"
+    "mongoURI": "mongodb+srv://obaid_k2:obaid123@devcluster-wqgqm.mongodb.net/test?retryWrites=true&w=majority",
+    "jwtSecret": "mysecret"
 }
