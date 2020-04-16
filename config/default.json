@@ -1,4 +1,6 @@
 {
     "mongoURI": "mongodb+srv://obaid_k2:obaid123@devcluster-wqgqm.mongodb.net/test?retryWrites=true&w=majority",
-    "jwtSecret": "mysecret"
+    "jwtSecret": "mysecret",
+    "githubClientId": "2fc1141e6b60748a07ee",
+    "githubClientSecret": "8b9d51cb4c594351e4aeeb7f9743b6f27604f8ed"
 }
