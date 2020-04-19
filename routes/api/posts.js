@@ -24,7 +24,7 @@ router.post(
         text: req.body.text,
         user: req.user.id,
         name: user.name,
-        avatar: user.avatar
+        avatar: user.avatar,
       });
 
       const post = await newPost.save();
@@ -35,5 +35,41 @@ router.post(
     }
   }
 );
+
+// @route  GET api/posts
+// @desc   Get all posts of user
+// @access private
+router.get('/', auth, async (req, res) => {
+  try {
+    const posts = await Post.find().sort({ date: -1 });
+    res.json(posts);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+// @route  GET api/posts
+// @desc   Get all posts of user
+// @access private
+router.get('/:id', async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+    if (!post) {
+      return res.status(404).json({ msg: 'Post not found' });
+    }
+    res.json(post)
+  } catch (error) {
+    console.error(error.message);
+    if ((error.kind = 'ObjectId')) {
+      return res.status(400).json({ msg: 'Post not found' });
+    }
+    res.status(500).send('Server Error');
+  }
+});
+
+// @route  GET api/posts
+// @desc   Get all posts of user
+// @access private
 
 module.exports = router;
