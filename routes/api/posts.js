@@ -52,7 +52,7 @@ router.get('/', auth, async (req, res) => {
 // @route  GET api/posts
 // @desc   Get all posts of user
 // @access private
-router.get('/:id', async (req, res) => {
+router.get('/:id', auth, async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
     if (!post) {
@@ -68,8 +68,26 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// @route  GET api/posts
-// @desc   Get all posts of user
+// @route  DEL api/posts
+// @desc   Delete post of user by id
 // @access private
+router.delete('/:id', auth, async (req, res) => {
+    try {
+      const post = await Post.findById(req.params.id);
+
+      //Check user
+      if (post.user.toString() !== req.user.id) {
+        return res.status(401).json({ msg: 'User not authorized' });
+      }
+      await post.remove();
+      res.json({ msg: 'Post removed'})
+    } catch (error) {
+      console.error(error.message);
+      if ((error.kind = 'ObjectId')) {
+        return res.status(400).json({ msg: 'Post not found' });
+      }
+      res.status(500).send('Server Error');
+    }
+  });
 
 module.exports = router;
