@@ -58,7 +58,7 @@ router.get('/:id', auth, async (req, res) => {
     if (!post) {
       return res.status(404).json({ msg: 'Post not found' });
     }
-    res.json(post)
+    res.json(post);
   } catch (error) {
     console.error(error.message);
     if ((error.kind = 'ObjectId')) {
@@ -72,22 +72,47 @@ router.get('/:id', auth, async (req, res) => {
 // @desc   Delete post of user by id
 // @access private
 router.delete('/:id', auth, async (req, res) => {
-    try {
-      const post = await Post.findById(req.params.id);
+  try {
+    const post = await Post.findById(req.params.id);
 
-      //Check user
-      if (post.user.toString() !== req.user.id) {
-        return res.status(401).json({ msg: 'User not authorized' });
-      }
-      await post.remove();
-      res.json({ msg: 'Post removed'})
-    } catch (error) {
-      console.error(error.message);
-      if ((error.kind = 'ObjectId')) {
-        return res.status(400).json({ msg: 'Post not found' });
-      }
-      res.status(500).send('Server Error');
+    //Check user
+    if (post.user.toString() !== req.user.id) {
+      return res.status(401).json({ msg: 'User not authorized' });
     }
-  });
+    await post.remove();
+    res.json({ msg: 'Post removed' });
+  } catch (error) {
+    console.error(error.message);
+    if ((error.kind = 'ObjectId')) {
+      return res.status(400).json({ msg: 'Post not found' });
+    }
+    res.status(500).send('Server Error');
+  }
+});
+// @route  PUT api/post/like/:id
+// @desc   like a post
+// @access private
+router.put('/like/:id', auth, async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+
+    // check if post have been liked before
+    if (
+      post.likes.filter((like) => like.user.toString() === req.user.id).length >
+      0
+    ) {
+      return res.status(400).json({ msg: 'Post already liked' });
+    }
+
+    post.likes.unshift({ user: req.user.id });
+
+    await post.save();
+
+    res.json(post.likes);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server Error');
+  }
+});
 
 module.exports = router;
