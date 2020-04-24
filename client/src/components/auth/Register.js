@@ -1,7 +1,10 @@
 import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const Register = () => {
+import { connect } from 'react-redux'
+import { setAlert } from '../../redux/alert/alert.action';
+
+const Register = (props) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -18,7 +21,7 @@ const Register = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (password !== password2) {
-      console.log('Passwords do not match');
+      props.setAlert('Passwords do not match', 'danger');
     } else {
       console.log(formData);
     // We will regiter user using redux action for checking that registeration is working or not
@@ -102,4 +105,6 @@ const Register = () => {
   );
 };
 
-export default Register;
+
+
+export default connect(null, {setAlert})(Register);
