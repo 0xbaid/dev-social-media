@@ -7,7 +7,7 @@ const bcrypt = require('bcryptjs');
 const config = require('config');
 const jwt = require('jsonwebtoken');
 
-// @route POST api/user
+// @route POST api/users
 // @desc  Register User
 // @access public
 router.post(

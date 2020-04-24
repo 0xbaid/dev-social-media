@@ -15,14 +15,31 @@ const Register = () => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     if (password !== password2) {
-        console.log('Passwords do not match')
+      console.log('Passwords do not match');
     } else {
-        console.log(formData);
+      console.log(formData);
+    // We will regiter user using redux action for checking that registeration is working or not
+    //   const newUser = {
+    //     name,
+    //     email,
+    //     password,
+    //   };
+    //   try {
+    //     const config = {
+    //       headers: {
+    //         'Content-Type': 'application/json',
+    //       },
+    //     };
+    //     const body = JSON.stringify(newUser);
+    //     const res = await axios.post('/api/users', body, config);
+    //     console.log(res.data);
+    //   } catch (error) {
+    //     console.error(error.response.data);
+    //   }
     }
-    
   };
 
   return (
@@ -31,10 +48,7 @@ const Register = () => {
       <p className="lead">
         <i className="fas fa-user"></i> Create Your Account
       </p>
-      <form
-        className="form"
-        onSubmit={handleSubmit}
-      >
+      <form className="form" onSubmit={handleSubmit}>
         <div className="form-group">
           <input
             type="text"
