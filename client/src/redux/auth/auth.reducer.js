@@ -4,11 +4,18 @@ const INITIAL_STATE = {
   token: localStorage.getItem('token'),
   isAuthenticated: null,
   loading: true,
-  user: null
+  user: null,
 };
 
 const authReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case authActionTypes.USER_LOADED:
+      return {
+        ...state,
+        isAuthenticated: true,
+        loading: false,
+        user: action.payload
+      }
     case authActionTypes.REGISTER_SUCCESS:
       localStorage.setItem('token', action.payload.token);
       return {
@@ -17,16 +24,17 @@ const authReducer = (state = INITIAL_STATE, action) => {
         isAuthenticated: true,
         loading: false
       };
+    case authActionTypes.AUTH_ERROR:
     case authActionTypes.REGISTER_FAIL:
       localStorage.removeItem('token');
       return {
         ...state,
         token: null,
         isAuthenticated: false,
-        loading: false
+        loading: false,
       };
     default:
       return state;
   }
 };
- export default authReducer;
+export default authReducer;
