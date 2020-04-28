@@ -1,5 +1,6 @@
 import { profileActionTypes } from './profile.action.types';
 
+
 const INITIAL_STATE = {
   profile: null,
   profiles: [],
@@ -22,6 +23,13 @@ const profileReducer = (state = INITIAL_STATE, action) => {
         error: action.payload,
         loading: false
       };
+      case profileActionTypes.CLEAR_PROFILE:
+        return {
+          ...state,
+          profile: null,
+          repos: [],
+          loading: false
+        }
     default:
       return state;
   }
