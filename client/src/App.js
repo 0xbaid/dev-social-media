@@ -5,6 +5,7 @@ import Navbar from './components/layout/Navbar';
 import Landing from './components/layout/Landing';
 import Alert from './components/layout/Alert';
 import Dashboard from './components/dashboard/Dashboard';
+import CreateProfile from './components/profile-forms/CreateProfile';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import PrivateRouting from './components/routing/PrivateRouting';
@@ -15,13 +16,13 @@ import { loadUser } from './redux/auth/auth.action';
 import setAuthToken from './redux/auth/auth.utils';
 
 if (localStorage.token) {
-  setAuthToken(localStorage.token)
+  setAuthToken(localStorage.token);
 }
 
 const App = () => {
   useEffect(() => {
-    store.dispatch(loadUser())
-  }, [])
+    store.dispatch(loadUser());
+  }, []);
   return (
     <Router>
       <Fragment>
@@ -33,6 +34,11 @@ const App = () => {
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
             <PrivateRouting exact path="/dashboard" component={Dashboard} />
+            <PrivateRouting
+              exact
+              path="/create-profile"
+              component={CreateProfile}
+            />
           </Switch>
         </section>
       </Fragment>
