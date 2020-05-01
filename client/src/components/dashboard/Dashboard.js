@@ -2,7 +2,6 @@ import React, { useEffect, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Spinner from '../layout/Spinner';
 import { Link } from 'react-router-dom';
-import Dashboard from './DashboardActions';
 
 //Redux
 import { connect } from 'react-redux';
@@ -12,7 +11,7 @@ import DashboardActions from './DashboardActions';
 const Dashboard = ({
   getCurrentProfile,
   auth: { user: { user } },
-  profile: { profile, loading },
+  profile: { profile, loading }
 }) => {
   useEffect(() => {
     getCurrentProfile();
@@ -28,7 +27,7 @@ const Dashboard = ({
       </p>
       {profile !== null ? (
         <Fragment>
-          {/* <DashboardActions /> */}
+          <DashboardActions />
         </Fragment>
       ) : (
         <Fragment>
