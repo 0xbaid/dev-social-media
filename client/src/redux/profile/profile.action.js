@@ -18,6 +18,56 @@ export const getCurrentProfile = () => async (dispatch) => {
   }
 };
 
+//Get all profiles
+export const getProfiles = () => async (dispatch) => {
+  try {
+    dispatch({ type: profileActionTypes.CLEAR_PROFILE });
+
+    const res = await axios.get('/api/profile');
+    dispatch({
+      type: profileActionTypes.GET_PROFILES,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: profileActionTypes.PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+//Get profiles by ID
+export const getProfileById = (userId) => async (dispatch) => {
+  try {
+    const res = await axios.get(`/api/profile/${userId}`);
+    dispatch({
+      type: profileActionTypes.GET_PROFILE,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: profileActionTypes.PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+//Get Github repos
+export const getGithubRepos = (username) => async (dispatch) => {
+  try {
+    const res = await axios.get(`/api/profile/github/${username}`);
+    dispatch({
+      type: profileActionTypes.GET_REPOS,
+      payload: res.data
+    });
+  } catch (err) {
+    dispatch({
+      type: profileActionTypes.PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
 // Create Profile or update profie
 export const createProfile = (formData, history, edit = false) => async (
   dispatch

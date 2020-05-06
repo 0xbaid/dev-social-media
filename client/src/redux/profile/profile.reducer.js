@@ -1,12 +1,11 @@
 import { profileActionTypes } from './profile.action.types';
 
-
 const INITIAL_STATE = {
   profile: null,
   profiles: [],
   repos: [],
   loading: true,
-  error: {}
+  error: {},
 };
 
 const profileReducer = (state = INITIAL_STATE, action) => {
@@ -16,21 +15,33 @@ const profileReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         profile: action.payload,
-        loading: false
+        loading: false,
+      };
+    case profileActionTypes.GET_PROFILES:
+      return {
+        ...state,
+        profiles: action.payload,
+        loading: false,
       };
     case profileActionTypes.PROFILE_ERROR:
       return {
         ...state,
         error: action.payload,
-        loading: false
+        loading: false,
       };
-      case profileActionTypes.CLEAR_PROFILE:
-        return {
-          ...state,
-          profile: null,
-          repos: [],
-          loading: false
-        }
+    case profileActionTypes.CLEAR_PROFILE:
+      return {
+        ...state,
+        profile: null,
+        repos: [],
+        loading: false,
+      };
+    case profileActionTypes.GET_REPOS:
+      return {
+        ...state,
+        repos: action.payload,
+        loading: false,
+      };
     default:
       return state;
   }
