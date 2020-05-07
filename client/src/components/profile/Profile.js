@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Spinner from '../layout/Spinner';
 import { Link } from 'react-router-dom';
 import ProfileTop from './ProfileTop';
+import ProfileAbout from './ProfileAbout';
 
 //Redux
 import { connect } from 'react-redux';
@@ -36,6 +37,7 @@ const Profile = ({
             )}
           <div class="profile-grid my-1">
             <ProfileTop profile={profile} />
+            <ProfileAbout profile={profile} />
           </div>
         </Fragment>
       )}
