@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import ProfileTop from './ProfileTop';
 import ProfileAbout from './ProfileAbout';
 import ProfileExperience from './ProfileExperience';
+import ProfileEducation from './ProfileEducation';
+import ProfileGithub from './ProfileGithub';
 
 //Redux
 import { connect } from 'react-redux';
@@ -54,6 +56,24 @@ const Profile = ({
                 <h4>No experience credentials found</h4>
               )}
             </div>
+            <div class="profile-edu bg-white p-2">
+              <h2 class="text-primary">Eduaction</h2>
+              {profile.education.length > 0 ? (
+                <Fragment>
+                  {profile.education.map((education) => (
+                    <ProfileEducation
+                      key={education._id}
+                      education={education}
+                    />
+                  ))}
+                </Fragment>
+              ) : (
+                <h4>No education credentials found</h4>
+              )}
+            </div>
+            {profile.githubusername && (<Fragment>
+              <ProfileGithub username={profile.githubusername} />
+            </Fragment>)}
           </div>
         </Fragment>
       )}
