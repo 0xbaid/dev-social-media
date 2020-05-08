@@ -4,6 +4,7 @@ import Spinner from '../layout/Spinner';
 import { Link } from 'react-router-dom';
 import ProfileTop from './ProfileTop';
 import ProfileAbout from './ProfileAbout';
+import ProfileExperience from './ProfileExperience';
 
 //Redux
 import { connect } from 'react-redux';
@@ -38,6 +39,21 @@ const Profile = ({
           <div class="profile-grid my-1">
             <ProfileTop profile={profile} />
             <ProfileAbout profile={profile} />
+            <div class="profile-exp bg-white p-2">
+              <h2 class="text-primary">Experience</h2>
+              {profile.experience.length > 0 ? (
+                <Fragment>
+                  {profile.experience.map((experience) => (
+                    <ProfileExperience
+                      key={experience._id}
+                      experience={experience}
+                    />
+                  ))}
+                </Fragment>
+              ) : (
+                <h4>No experience credentials found</h4>
+              )}
+            </div>
           </div>
         </Fragment>
       )}
@@ -48,12 +64,12 @@ const Profile = ({
 Profile.propTypes = {
   profile: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
-  getProfileById: PropTypes.func.isRequired
+  getProfileById: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   profile: state.profile,
-  auth: state.auth
+  auth: state.auth,
 });
 
 export default connect(mapStateToProps, { getProfileById })(Profile);
