@@ -1,5 +1,6 @@
 import { postActionTypes } from './post.action.types';
 import axios from 'axios';
+// import { setAlert } from '../alert/alert.action';
 
 export const getPosts = () => async (dispatch) => {
   try {

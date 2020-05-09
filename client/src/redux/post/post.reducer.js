@@ -3,7 +3,7 @@ import { postActionTypes } from './post.action.types';
 const INITIAL_STATE = {
   post: null,
   posts: [],
-  laoding: true,
+  loading: true,
   error: {},
 };
 
