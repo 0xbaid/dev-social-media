@@ -27,20 +27,20 @@ const profileReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         error: action.payload,
-        loading: false,
+        loading: false
       };
     case profileActionTypes.CLEAR_PROFILE:
       return {
         ...state,
         profile: null,
         repos: [],
-        loading: false,
+        loading: false
       };
     case profileActionTypes.GET_REPOS:
       return {
         ...state,
         repos: action.payload,
-        loading: false,
+        loading: false
       };
     default:
       return state;
