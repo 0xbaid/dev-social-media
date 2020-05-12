@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Moment from 'react-moment';
 import { Link } from 'react-router-dom';
@@ -13,6 +13,7 @@ const PostItem = ({
   deletePost,
   auth,
   post: { _id, text, name, avatar, user, likes, comments, date },
+  showActions
 }) => {
   return (
     <div className="post bg-white p-1 my-1">
@@ -27,6 +28,7 @@ const PostItem = ({
         <p className="post-date">
           Posted on <Moment format="DD-MM-YYYY">{date}</Moment>
         </p>
+        { showActions && <Fragment>
         <button onClick={() => addLike(_id)} type="button" className="btn btn-light">
           <i className="fas fa-thumbs-up"></i>
           {likes.length > 0 && (
@@ -47,10 +49,15 @@ const PostItem = ({
             <i className="fas fa-times"></i>
           </button>
         )}
+        </Fragment>}
       </div>
     </div>
   );
 };
+
+PostItem.defaultProps ={
+  showActions: true
+}
 
 PostItem.propTypes = {
   post: PropTypes.object.isRequired,

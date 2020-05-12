@@ -1,5 +1,4 @@
 import { postActionTypes } from './post.action.types';
-import { alertActionTypes } from '../alert/alert.action.types';
 
 const INITIAL_STATE = {
   post: null,
