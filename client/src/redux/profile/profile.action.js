@@ -11,7 +11,7 @@ export const getCurrentProfile = () => async (dispatch) => {
       payload: res.data,
     });
   } catch (err) {
-    dispatch({type: profileActionTypes.CLEAR_PROFILE})
+    dispatch({ type: profileActionTypes.CLEAR_PROFILE });
     dispatch({
       type: profileActionTypes.PROFILE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
@@ -59,12 +59,12 @@ export const getGithubRepos = (username) => async (dispatch) => {
     const res = await axios.get(`/api/profile/github/${username}`);
     dispatch({
       type: profileActionTypes.GET_REPOS,
-      payload: res.data
+      payload: res.data,
     });
   } catch (err) {
     dispatch({
       type: profileActionTypes.PROFILE_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status }
+      payload: { msg: err.response.statusText, status: err.response.status },
     });
   }
 };
@@ -73,12 +73,12 @@ export const getGithubRepos = (username) => async (dispatch) => {
 export const createProfile = (formData, history, edit = false) => async (
   dispatch
 ) => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
   try {
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    };
     const res = await axios.post('/api/profile', formData, config);
 
     dispatch({
