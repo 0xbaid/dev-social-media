@@ -1,4 +1,5 @@
 import { postActionTypes } from './post.action.types';
+import { alertActionTypes } from '../alert/alert.action.types';
 
 const INITIAL_STATE = {
   post: null,
@@ -19,6 +20,11 @@ const postReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         posts: [action.payload, ...state.posts],
+        loading: false
+      }
+    case postActionTypes.GET_POST:
+      return {
+        post: action.payload,
         loading: false
       }
     case postActionTypes.DELETE_POST:

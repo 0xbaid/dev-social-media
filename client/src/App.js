@@ -14,6 +14,7 @@ import Profile from './components/profile/Profile';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Posts from './components/posts/Posts';
+import Post from './components/post/Post';
 import PrivateRouting from './components/routing/PrivateRouting';
 
 //Redux
@@ -66,6 +67,11 @@ const App = () => {
               exact
               path="/posts"
               component={Posts}
+            />
+            <PrivateRouting
+              exact
+              path="/posts/:id"
+              component={Post}
             />
           </Switch>
         </section>

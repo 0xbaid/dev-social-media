@@ -90,3 +90,19 @@ export const addPost = (formData) => async (dispatch) => {
     });
   }
 };
+
+//Get post
+export const getPost = (id) => async (dispatch) => {
+  try {
+    const res = await axios.get(`/api/posts/${id}`);
+    dispatch({
+      type: postActionTypes.GET_POST,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: postActionTypes.POST_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
