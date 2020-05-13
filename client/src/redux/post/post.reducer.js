@@ -19,13 +19,13 @@ const postReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         posts: [action.payload, ...state.posts],
-        loading: false
-      }
+        loading: false,
+      };
     case postActionTypes.GET_POST:
       return {
         post: action.payload,
-        loading: false
-      }
+        loading: false,
+      };
     case postActionTypes.DELETE_POST:
       return {
         ...state,
@@ -47,6 +47,23 @@ const postReducer = (state = INITIAL_STATE, action) => {
             : post
         ),
         loading: false,
+      };
+    case postActionTypes.ADD_COMMENT:
+      return {
+        ...state,
+        post: { ...state.post, comments: action.payload },
+        loading: false
+      };
+    case postActionTypes.REMOVE_COMMENT:
+      return {
+        ...state,
+        post: {
+          ...state.post,
+          comments: state.post.comments.filter(
+            (comment) => comment._id !== action.payload
+        )
+        },
+        loading: false
       };
     default:
       return state;
